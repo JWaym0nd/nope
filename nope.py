@@ -34,12 +34,14 @@ except:
     print('No privacy alert found.')
 time.sleep(5)
 driver.find_element(By.XPATH, sign_in_xpath).click()
-driver.implicitly_wait(15)
+#driver.implicitly_wait(10)
+time.sleep(10)
 driver.find_element(By.XPATH, use_pho_num_xpath).click()
 actions = ActionChains(driver)
 actions = actions.send_keys('4042175250')
 actions = actions.send_keys(Keys.ENTER)
 actions.perform()
+time.sleep(10)
 
 yessir = driver.find_element(By.XPATH, like_xpath).is_selected()
 nossir = driver.find_element(By.XPATH, pass_xpath).is_selected()
@@ -47,22 +49,28 @@ nossir = driver.find_element(By.XPATH, pass_xpath).is_selected()
 def getRekognitionScore():
     pass
 
-def like_or_pass(driver):
+def like_or_pass():
     time.sleep(10)
     # integrate js to detect button press
-    js = "var clicked = false \
-         document.getElementById("+ pass_jspath +"}).addEventListener(\"click\", function() { \
-         clicked = true \
-         });"
-    js1 = "var x = document.getElementById("+ pass_jspath +"); \
-         x.addEventListener(\"click\", function() { \
-         alert(\"You clicked me\"); \
-         })"
-    x = driver.execute_script(js1)
+    driver.save_screenshot('shot.png')
+    js2 = "var clicked = false; \
+        document.getElementById('document.querySelector(\"#main > div > div.page__layout > main > div.page__content-inner >div   > div > span > div.encounters-user__controls > div > div:nth-child(2) > div > div:nth-child(2) > div > div.encounters-action__icon > span\")').addEventListener(\"click\", function() { \
+            clicked = true; \
+            return clicked \
+            });"
+
+    js2 = "var clicked = false; \
+    return document.querySelector(\"#main > div > div.page__layout > main > div.page__content-inner > div > div > span > div.encounters-user__controls > div > div:nth-child(2) > div > div:nth-child(2) > div > div.encounters-action__icon > span\").addEventListener(\"click\", function() { \
+        clicked = true; \
+        return clicked; \
+        });"
+
+    x = driver.execute_script(js2)
     print('x: ', x)
     return x
+
 time.sleep(5)
-decision = like_or_pass(driver)
+decision = like_or_pass()
 
 def getPic():
     #like_or_pass(driver)
