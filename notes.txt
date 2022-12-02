@@ -1,2 +1,4 @@
 Eventually, consider using HTTP instead of local images or an S3 Bucket.
-Analyzing the user's "Likes" is probably less resource intensive than analyzing their "Passes."  
+Analyzing the user's "Likes" is probably less resource intensive than analyzing their "Passes." 
+Put Driver in a file of its own so it never logs out.
+Link text is either "Hidden" or "Nope".
